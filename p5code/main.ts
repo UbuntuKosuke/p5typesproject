@@ -1,5 +1,7 @@
 import p5 from "p5";
 import { Circle } from "./circle";
+import { Rectangle } from "./rectangle";
+import { Ball } from "./ball";
 
 export const canvasWidth = 400;
 export const canvasHeigh = 400;
@@ -7,18 +9,30 @@ export const canvasHeigh = 400;
 const canvas = document.querySelector("div#sketch") as HTMLElement;
 const sketch = (p: p5) => {
   const circles: Circle[] = [];
+  const rectangles: Rectangle[] = [];
+  let ball: Ball;
 
   p.setup = () => {
     p.createCanvas(canvasWidth, canvasHeigh);
+    ball = new Ball(p, p.mouseX, p.mouseY);
   };
   p.draw = () => {
-    if (p.floor(p.random(0, 10)) == 0) circles.push(new Circle(p));
-
     p.background(130);
+    ball.moveBall(p.mouseX, p.mouseY);
+    ball.drawBall();
+    if (p.floor(p.random(0, 10)) == 0) {
+      circles.push(new Circle(p));
+      rectangles.push(new Rectangle(p));
+    }
+
     // 描画処理など
     circles.forEach((c) => {
       c.moveCircle();
       c.drawCircle();
+    });
+    rectangles.forEach((r) => {
+      r.moveRect();
+      r.drawRect();
     });
   };
 };
