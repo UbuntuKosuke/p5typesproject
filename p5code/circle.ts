@@ -1,7 +1,8 @@
 import p5 from "p5";
 import { canvasWidth } from "./main";
+import { collidObj } from "./ball";
 
-export class Circle {
+export class Circle implements collidObj {
   private x: number;
   private y: number;
   private r: number;

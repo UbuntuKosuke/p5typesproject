@@ -27,6 +27,7 @@ const sketch = (p: p5) => {
 
     // 描画処理など
     circles.forEach((c) => {
+      ball.collided(Circle);
       c.moveCircle();
       c.drawCircle();
     });
